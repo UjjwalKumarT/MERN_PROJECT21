@@ -52,7 +52,7 @@ app.get("/read",async(request,response)=>{
 //             res.send("data not found")
 //         }
 //         await FoodModel.findById(id,(err,updatedFood)=>{
-//         //  await FoodModel.findByIdAndUpdate(id},(err, updatedFood)=>{
+//         //  await FoodModel.findByIdAndUpdate((id),(err, updatedFood)=>{
 //             updatedFood.foodName = newFoodName;
 //             updatedFood.daysSinceIAte = newDays
 //             updatedFood.save();
@@ -74,7 +74,7 @@ app.put("/update/:id",async(req,res)=>{
 
   const id = req.params.id;
 
-  FoodModel.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+  FoodModel.findByIdAndUpdate(id, req.body, { useFindAndModify: true })
     .then(data => {
       if (!data) {
         res.status(404).send({
