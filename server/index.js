@@ -73,9 +73,17 @@ app.put("/update/:id",async(req,res)=>{
   }
 
   const id = req.params.id;
+  const newFoodName = req.body.newFoodName;
+     const newDays = req.body.newDays;
 
-  FoodModel.findByIdAndUpdate(id, req.body, { useFindAndModify: true })
+  FoodModel.findByIdAndUpdate({_id:id},
+    {foodName : newFoodName,
+      daysSinceIAte : newDays
+      
+    },
+    req.body, { useFindAndModify: true })
     .then(data => {
+      console.log(data);
       if (!data) {
         res.status(404).send({
           message: `Cannot update Food with id=${id}. Maybe Food was not found!`
